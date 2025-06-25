@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almoxarifado - Produtos</title>
+    
+    <!-- Bootstrap 5.3.0 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <!-- Logo -->
+        <div class="sidebar-header">
+            <div class="logo-container">
+                <i class="bi bi-boxes logo-icon"></i>
+            </div>
+            <h4>Almoxarifado</h4>
+        </div>
+        
+        <!-- Menu Items -->
+        <ul class="sidebar-menu">
+            <li class="menu-item">
+                <a href="index.html">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item active">
+                <a href="produtos.html">
+                    <i class="bi bi-box"></i>
+                    <span>Produtos</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="movimentacoes.html">
+                    <i class="bi bi-arrow-left-right"></i>
+                    <span>Movimentações</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="categorias.html">
+                    <i class="bi bi-tag"></i>
+                    <span>Categorias</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="fornecedores.html">
+                    <i class="bi bi-truck"></i>
+                    <span>Fornecedores</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="relatorios.html">
+                    <i class="bi bi-file-text"></i>
+                    <span>Relatórios</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="configuracoes.html">
+                    <i class="bi bi-gear"></i>
+                    <span>Configurações</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Topbar -->
+        <header class="topbar">
+            <button class="btn btn-link menu-toggle d-lg-none" id="menuToggle">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <div class="topbar-right">
+                <!-- Notifications -->
+                <button class="btn btn-link notification-btn" id="notificationBtn">
+                    <i class="bi bi-bell"></i>
+                    <span class="badge">3</span>
+                </button>
+                
+                <!-- User Profile -->
+                <div class="user-profile dropdown">
+                    <div class="user-info" data-bs-toggle="dropdown">
+                        <div class="avatar">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <span class="user-name">João Silva</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Perfil</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Configurações</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="login.html"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Page Content -->
+        <main class="content">
+            <div class="page-header">
+                <h1>Produtos</h1>
+                <button class="btn btn-primary" onclick="window.location.href='produto-novo.html'">
+                    <i class="bi bi-plus"></i> Novo Produto
+                </button>
+            </div>
+
+            <!-- Filters -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="Buscar por nome ou código..." id="searchInput">
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="categoryFilter">
+                                <option value="">Todas as categorias</option>
+                                <option value="ferramentas">Ferramentas</option>
+                                <option value="parafusos">Parafusos</option>
+                                <option value="equipamentos">Equipamentos</option>
+                                <option value="materiais">Materiais Elétricos</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="statusFilter">
+                                <option value="">Todos os status</option>
+                                <option value="normal">Normal</option>
+                                <option value="baixo">Estoque Baixo</option>
+                                <option value="critico">Crítico</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-outline-secondary w-100" onclick="clearFilters()">
+                                <i class="bi bi-x"></i> Limpar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Table -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" id="productsTable">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nome</th>
+                                    <th>Categoria</th>
+                                    <th>Estoque</th>
+                                    <th>Mínimo</th>
+                                    <th>Localização</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>PRD001</td>
+                                    <td>Parafuso Sextavado M8</td>
+                                    <td>Parafusos</td>
+                                    <td>150</td>
+                                    <td>50</td>
+                                    <td>A1-B2</td>
+                                    <td><span class="badge bg-success">Normal</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" title="Editar" onclick="editProduct('PRD001')">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-info" title="Histórico" onclick="viewHistory('PRD001')">
+                                            <i class="bi bi-clock-history"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger" title="Excluir" onclick="deleteProduct('PRD001', 'Parafuso Sextavado M8')">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>PRD002</td>
+                                    <td>Chave de Fenda 5mm</td>
+                                    <td>Ferramentas</td>
+                                    <td>25</td>
+                                    <td>30</td>
+                                    <td>B2-C1</td>
+                                    <td><span class="badge bg-warning">Baixo</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" title="Editar" onclick="editProduct('PRD002')">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-info" title="Histórico" onclick="viewHistory('PRD002')">
+                                            <i class="bi bi-clock-history"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger" title="Excluir" onclick="deleteProduct('PRD002', 'Chave de Fenda 5mm')">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>PRD003</td>
+                                    <td>Martelo 500g</td>
+                                    <td>Ferramentas</td>
+                                    <td>8</td>
+                                    <td>20</td>
+                                    <td>A3-B1</td>
+                                    <td><span class="badge bg-danger">Crítico</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" title="Editar" onclick="editProduct('PRD003')">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-info" title="Histórico" onclick="viewHistory('PRD003')">
+                                            <i class="bi bi-clock-history"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger" title="Excluir" onclick="deleteProduct('PRD003', 'Martelo 500g')">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>PRD004</td>
+                                    <td>Fita Isolante 19mm</td>
+                                    <td>Materiais Elétricos</td>
+                                    <td>200</td>
+                                    <td>100</td>
+                                    <td>C1-D2</td>
+                                    <td><span class="badge bg-success">Normal</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" title="Editar" onclick="editProduct('PRD004')">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-info" title="Histórico" onclick="viewHistory('PRD004')">
+                                            <i class="bi bi-clock-history"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger" title="Excluir" onclick="deleteProduct('PRD004', 'Fita Isolante 19mm')">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>PRD005</td>
+                                    <td>Broca 8mm HSS</td>
+                                    <td>Ferramentas</td>
+                                    <td>75</td>
+                                    <td>40</td>
+                                    <td>B1-A3</td>
+                                    <td><span class="badge bg-success">Normal</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary" title="Editar" onclick="editProduct('PRD005')">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-info" title="Histórico" onclick="viewHistory('PRD005')">
+                                            <i class="bi bi-clock-history"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger" title="Excluir" onclick="deleteProduct('PRD005', 'Broca 8mm HSS')">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/produtos.js"></script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almoxarifado - Nova Devolução</title>
+    
+    <!-- Bootstrap 5.3.0 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <!-- Logo -->
+        <div class="sidebar-header">
+            <div class="logo-container">
+                <i class="bi bi-boxes logo-icon"></i>
+            </div>
+            <h4>Almoxarifado</h4>
+        </div>
+        
+        <!-- Menu Items -->
+        <ul class="sidebar-menu">
+            <li class="menu-item">
+                <a href="index.html">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="itens-fisicos.html">
+                    <i class="bi bi-tools"></i>
+                    <span>Itens Físicos</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="retiradas.html">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Retiradas</span>
+                </a>
+            </li>
+            <li class="menu-item active">
+                <a href="devolucoes.html">
+                    <i class="bi bi-box-arrow-in-left"></i>
+                    <span>Devoluções</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="produtos.html">
+                    <i class="bi bi-box"></i>
+                    <span>Produtos</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="movimentacoes.html">
+                    <i class="bi bi-arrow-left-right"></i>
+                    <span>Movimentações</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="categorias.html">
+                    <i class="bi bi-tag"></i>
+                    <span>Categorias</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="fornecedores.html">
+                    <i class="bi bi-truck"></i>
+                    <span>Fornecedores</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="relatorios.html">
+                    <i class="bi bi-file-text"></i>
+                    <span>Relatórios</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="configuracoes.html">
+                    <i class="bi bi-gear"></i>
+                    <span>Configurações</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Topbar -->
+        <header class="topbar">
+            <button class="btn btn-link menu-toggle d-lg-none" id="menuToggle">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <div class="topbar-right">
+                <!-- Notifications -->
+                <button class="btn btn-link notification-btn" id="notificationBtn">
+                    <i class="bi bi-bell"></i>
+                    <span class="badge">5</span>
+                </button>
+                
+                <!-- User Profile -->
+                <div class="user-profile dropdown">
+                    <div class="user-info" data-bs-toggle="dropdown">
+                        <div class="avatar">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <span class="user-name">João Silva</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Perfil</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Configurações</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="login.html"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Page Content -->
+        <main class="content">
+            <div class="page-header">
+                <h1>Nova Devolução</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="devolucoes.html">Devoluções</a></li>
+                        <li class="breadcrumb-item active">Nova Devolução</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <form id="devolucaoForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Item Emprestado *</label>
+                                <select class="form-select" id="itemEmprestado" required>
+                                    <option value="">Selecione um item emprestado...</option>
+                                    <option value="MAR002">MAR002 - Martelo Pneumático Atlas (Ana Costa)</option>
+                                    <option value="ESM003">ESM003 - Esmerilhadeira Angular Makita (Pedro Santos)</option>
+                                    <option value="CHV009">CHV009 - Chave de Impacto (Maria Santos)</option>
+                                    <option value="TAL010">TAL010 - Talha Elétrica 2T (Carlos Lima)</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Por favor, selecione um item emprestado.
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Data da Devolução</label>
+                                <input type="date" class="form-control" id="dataDevolucao" value="">
+                                <small class="form-text text-muted">Padrão: data atual</small>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Condição do Item *</label>
+                                <select class="form-select" id="condicaoItem" required>
+                                    <option value="">Selecione a condição...</option>
+                                    <option value="perfeito">Perfeito Estado</option>
+                                    <option value="bom">Bom Estado</option>
+                                    <option value="desgaste">Desgaste Normal</option>
+                                    <option value="danificado">Danificado</option>
+                                    <option value="manutencao">Necessita Manutenção</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Por favor, informe a condição do item.
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Nova Localização</label>
+                                <select class="form-select" id="novaLocalizacao">
+                                    <option value="">Selecione...</option>
+                                    <option value="almoxarifado">Almoxarifado</option>
+                                    <option value="manutencao">Oficina de Manutenção</option>
+                                    <option value="limpeza">Área de Limpeza</option>
+                                    <option value="descarte">Descarte</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Observações sobre a Devolução</label>
+                            <textarea class="form-control" id="observacoesDevolucao" rows="3" placeholder="Descreva o estado do item, problemas encontrados, etc..."></textarea>
+                        </div>
+
+                        <!-- Loan Info Display -->
+                        <div id="loanInfo" class="alert alert-warning d-none">
+                            <h6><i class="bi bi-info-circle"></i> Informações do Empréstimo</h6>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <small class="text-muted">Data da Retirada:</small>
+                                    <div id="loanDate" class="fw-bold">-</div>
+                                </div>
+                                <div class="col-md-3">
+                                    <small class="text-muted">Data Prevista:</small>
+                                    <div id="expectedDate" class="fw-bold">-</div>
+                                </div>
+                                <div class="col-md-3">
+                                    <small class="text-muted">Usuário:</small>
+                                    <div id="loanUser" class="fw-bold">-</div>
+                                </div>
+                                <div class="col-md-3">
+                                    <small class="text-muted">Status:</small>
+                                    <div id="loanStatus" class="fw-bold">-</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Maintenance Alert -->
+                        <div id="maintenanceAlert" class="alert alert-info d-none">
+                            <h6><i class="bi bi-wrench"></i> Atenção!</h6>
+                            <p class="mb-0">Este item será direcionado para manutenção devido à condição reportada.</p>
+                        </div>
+                        
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-box-arrow-in-left"></i> Confirmar Devolução
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='devolucoes.html'">
+                                <i class="bi bi-arrow-left"></i> Voltar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Set current date as default
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('dataDevolucao').value = today;
+            
+            // Check for pre-selected item from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const itemId = urlParams.get('item');
+            if (itemId) {
+                document.getElementById('itemEmprestado').value = itemId;
+                updateLoanInfo(itemId);
+            }
+        });
+
+        document.getElementById('itemEmprestado').addEventListener('change', function() {
+            updateLoanInfo(this.value);
+        });
+
+        document.getElementById('condicaoItem').addEventListener('change', function() {
+            const condition = this.value;
+            const maintenanceAlert = document.getElementById('maintenanceAlert');
+            
+            if (condition === 'danificado' || condition === 'manutencao') {
+                maintenanceAlert.classList.remove('d-none');
+                document.getElementById('novaLocalizacao').value = 'manutencao';
+            } else {
+                maintenanceAlert.classList.add('d-none');
+                document.getElementById('novaLocalizacao').value = 'almoxarifado';
+            }
+        });
+
+        function updateLoanInfo(itemId) {
+            if (!itemId) {
+                hideLoanInfo();
+                return;
+            }
+            
+            // Simulate fetching loan data
+            const loans = {
+                'MAR002': { 
+                    loanDate: '19/11/2024', 
+                    expectedDate: '21/11/2024', 
+                    user: 'Ana Costa', 
+                    status: 'Atrasado',
+                    statusClass: 'text-danger'
+                },
+                'ESM003': { 
+                    loanDate: '22/11/2024', 
+                    expectedDate: '25/11/2024', 
+                    user: 'Pedro Santos', 
+                    status: 'No Prazo',
+                    statusClass: 'text-success'
+                },
+                'CHV009': { 
+                    loanDate: '20/11/2024', 
+                    expectedDate: '24/11/2024', 
+                    user: 'Maria Santos', 
+                    status: 'No Prazo',
+                    statusClass: 'text-success'
+                },
+                'TAL010': { 
+                    loanDate: '18/11/2024', 
+                    expectedDate: '23/11/2024', 
+                    user: 'Carlos Lima', 
+                    status: 'No Prazo',
+                    statusClass: 'text-success'
+                }
+            };
+            
+            const loan = loans[itemId];
+            if (loan) {
+                showLoanInfo(loan);
+            }
+        }
+
+        function showLoanInfo(loan) {
+            const loanInfo = document.getElementById('loanInfo');
+            document.getElementById('loanDate').textContent = loan.loanDate;
+            document.getElementById('expectedDate').textContent = loan.expectedDate;
+            document.getElementById('loanUser').textContent = loan.user;
+            
+            const statusElement = document.getElementById('loanStatus');
+            statusElement.textContent = loan.status;
+            statusElement.className = `fw-bold ${loan.statusClass}`;
+            
+            loanInfo.classList.remove('d-none');
+        }
+
+        function hideLoanInfo() {
+            const loanInfo = document.getElementById('loanInfo');
+            loanInfo.classList.add('d-none');
+        }
+
+        document.getElementById('devolucaoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!validateForm('devolucaoForm')) {
+                showToast('Por favor, preencha todos os campos obrigatórios', 'danger');
+                return;
+            }
+            
+            showToast('Processando devolução...', 'info');
+            
+            setTimeout(() => {
+                showToast('Devolução registrada com sucesso!', 'success');
+                setTimeout(() => {
+                    window.location.href = 'devolucoes.html';
+                }, 1500);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

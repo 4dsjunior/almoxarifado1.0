@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almoxarifado - Categorias</title>
+    
+    <!-- Bootstrap 5.3.0 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <!-- Logo -->
+        <div class="sidebar-header">
+            <div class="logo-container">
+                <i class="bi bi-boxes logo-icon"></i>
+            </div>
+            <h4>Almoxarifado</h4>
+        </div>
+        
+        <!-- Menu Items -->
+        <ul class="sidebar-menu">
+            <li class="menu-item">
+                <a href="index.html">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="produtos.html">
+                    <i class="bi bi-box"></i>
+                    <span>Produtos</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="movimentacoes.html">
+                    <i class="bi bi-arrow-left-right"></i>
+                    <span>Movimentações</span>
+                </a>
+            </li>
+            <li class="menu-item active">
+                <a href="categorias.html">
+                    <i class="bi bi-tag"></i>
+                    <span>Categorias</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="fornecedores.html">
+                    <i class="bi bi-truck"></i>
+                    <span>Fornecedores</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="relatorios.html">
+                    <i class="bi bi-file-text"></i>
+                    <span>Relatórios</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="configuracoes.html">
+                    <i class="bi bi-gear"></i>
+                    <span>Configurações</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Topbar -->
+        <header class="topbar">
+            <button class="btn btn-link menu-toggle d-lg-none" id="menuToggle">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <div class="topbar-right">
+                <!-- Notifications -->
+                <button class="btn btn-link notification-btn" id="notificationBtn">
+                    <i class="bi bi-bell"></i>
+                    <span class="badge">3</span>
+                </button>
+                
+                <!-- User Profile -->
+                <div class="user-profile dropdown">
+                    <div class="user-info" data-bs-toggle="dropdown">
+                        <div class="avatar">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <span class="user-name">João Silva</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Perfil</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Configurações</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="login.html"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Page Content -->
+        <main class="content">
+            <div class="page-header">
+                <h1>Categorias</h1>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#categoryModal">
+                    <i class="bi bi-plus"></i> Nova Categoria
+                </button>
+            </div>
+
+            <!-- Categories Grid -->
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card category-card">
+                        <div class="card-body text-center">
+                            <div class="category-icon mb-3">
+                                <i class="bi bi-hammer text-primary" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5 class="card-title">Ferramentas</h5>
+                            <p class="text-muted mb-2">245 produtos</p>
+                            <div class="category-actions">
+                                <button class="btn btn-sm btn-outline-primary" onclick="editCategory('ferramentas')">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-info" onclick="viewCategoryProducts('ferramentas')">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteCategory('ferramentas', 'Ferramentas')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card category-card">
+                        <div class="card-body text-center">
+                            <div class="category-icon mb-3">
+                                <i class="bi bi-nut text-warning" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5 class="card-title">Parafusos</h5>
+                            <p class="text-muted mb-2">189 produtos</p>
+                            <div class="category-actions">
+                                <button class="btn btn-sm btn-outline-primary" onclick="editCategory('parafusos')">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-info" onclick="viewCategoryProducts('parafusos')">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteCategory('parafusos', 'Parafusos')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card category-card">
+                        <div class="card-body text-center">
+                            <div class="category-icon mb-3">
+                                <i class="bi bi-gear text-success" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5 class="card-title">Equipamentos</h5>
+                            <p class="text-muted mb-2">87 produtos</p>
+                            <div class="category-actions">
+                                <button class="btn btn-sm btn-outline-primary" onclick="editCategory('equipamentos')">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-info" onclick="viewCategoryProducts('equipamentos')">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteCategory('equipamentos', 'Equipamentos')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card category-card">
+                        <div class="card-body text-center">
+                            <div class="category-icon mb-3">
+                                <i class="bi bi-lightning text-danger" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5 class="card-title">Materiais Elétricos</h5>
+                            <p class="text-muted mb-2">156 produtos</p>
+                            <div class="category-actions">
+                                <button class="btn btn-sm btn-outline-primary" onclick="editCategory('materiais')">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-info" onclick="viewCategoryProducts('materiais')">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteCategory('materiais', 'Materiais Elétricos')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card category-card">
+                        <div class="card-body text-center">
+                            <div class="category-icon mb-3">
+                                <i class="bi bi-droplet text-info" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5 class="card-title">Consumíveis</h5>
+                            <p class="text-muted mb-2">98 produtos</p>
+                            <div class="category-actions">
+                                <button class="btn btn-sm btn-outline-primary" onclick="editCategory('consumiveis')">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-info" onclick="viewCategoryProducts('consumiveis')">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteCategory('consumiveis', 'Consumíveis')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card category-card">
+                        <div class="card-body text-center">
+                            <div class="category-icon mb-3">
+                                <i class="bi bi-shield text-secondary" style="font-size: 3rem;"></i>
+                            </div>
+                            <h5 class="card-title">EPI</h5>
+                            <p class="text-muted mb-2">67 produtos</p>
+                            <div class="category-actions">
+                                <button class="btn btn-sm btn-outline-primary" onclick="editCategory('epi')">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-info" onclick="viewCategoryProducts('epi')">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="deleteCategory('epi', 'EPI')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Category Modal -->
+    <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="categoryModalLabel">Nova Categoria</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="categoryForm">
+                        <div class="mb-3">
+                            <label for="categoryName" class="form-label">Nome da Categoria *</label>
+                            <input type="text" class="form-control" id="categoryName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoryDescription" class="form-label">Descrição</label>
+                            <textarea class="form-control" id="categoryDescription" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoryIcon" class="form-label">Ícone</label>
+                            <select class="form-select" id="categoryIcon">
+                                <option value="bi-hammer">🔨 Martelo</option>
+                                <option value="bi-nut">🔩 Parafuso</option>
+                                <option value="bi-gear">⚙️ Engrenagem</option>
+                                <option value="bi-lightning">⚡ Raio</option>
+                                <option value="bi-droplet">💧 Gota</option>
+                                <option value="bi-shield">🛡️ Escudo</option>
+                                <option value="bi-wrench">🔧 Chave</option>
+                                <option value="bi-screwdriver">🪛 Chave de Fenda</option>
+                            </select>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="categoryActive" checked>
+                            <label class="form-check-label" for="categoryActive">
+                                Categoria Ativa
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="saveCategory()">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        function editCategory(categoryId) {
+            document.getElementById('categoryModalLabel').textContent = 'Editar Categoria';
+            // Populate form with category data
+            showToast('Carregando categoria para edição...', 'info');
+            const modal = new bootstrap.Modal(document.getElementById('categoryModal'));
+            modal.show();
+        }
+
+        function viewCategoryProducts(categoryId) {
+            showToast('Carregando produtos da categoria...', 'info');
+            setTimeout(() => {
+                window.location.href = `produtos.html?category=${categoryId}`;
+            }, 1000);
+        }
+
+        function deleteCategory(categoryId, categoryName) {
+            confirmDelete(categoryName, () => {
+                // Simulate category deletion
+                showToast('Categoria excluída com sucesso!', 'success');
+            });
+        }
+
+        function saveCategory() {
+            const form = document.getElementById('categoryForm');
+            const name = document.getElementById('categoryName').value;
+            
+            if (!name.trim()) {
+                showToast('Por favor, informe o nome da categoria', 'danger');
+                return;
+            }
+            
+            showToast('Salvando categoria...', 'info');
+            
+            setTimeout(() => {
+                showToast('Categoria salva com sucesso!', 'success');
+                const modal = bootstrap.Modal.getInstance(document.getElementById('categoryModal'));
+                modal.hide();
+                form.reset();
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

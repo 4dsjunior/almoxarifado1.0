@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almoxarifado - Detalhes do Item</title>
+    
+    <!-- Bootstrap 5.3.0 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <!-- Logo -->
+        <div class="sidebar-header">
+            <div class="logo-container">
+                <i class="bi bi-boxes logo-icon"></i>
+            </div>
+            <h4>Almoxarifado</h4>
+        </div>
+        
+        <!-- Menu Items -->
+        <ul class="sidebar-menu">
+            <li class="menu-item">
+                <a href="index.html">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item active">
+                <a href="itens-fisicos.html">
+                    <i class="bi bi-tools"></i>
+                    <span>Itens Físicos</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="retiradas.html">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Retiradas</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="devolucoes.html">
+                    <i class="bi bi-box-arrow-in-left"></i>
+                    <span>Devoluções</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="produtos.html">
+                    <i class="bi bi-box"></i>
+                    <span>Produtos</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="movimentacoes.html">
+                    <i class="bi bi-arrow-left-right"></i>
+                    <span>Movimentações</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="categorias.html">
+                    <i class="bi bi-tag"></i>
+                    <span>Categorias</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="fornecedores.html">
+                    <i class="bi bi-truck"></i>
+                    <span>Fornecedores</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="relatorios.html">
+                    <i class="bi bi-file-text"></i>
+                    <span>Relatórios</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="configuracoes.html">
+                    <i class="bi bi-gear"></i>
+                    <span>Configurações</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Topbar -->
+        <header class="topbar">
+            <button class="btn btn-link menu-toggle d-lg-none" id="menuToggle">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <div class="topbar-right">
+                <!-- Notifications -->
+                <button class="btn btn-link notification-btn" id="notificationBtn">
+                    <i class="bi bi-bell"></i>
+                    <span class="badge">5</span>
+                </button>
+                
+                <!-- User Profile -->
+                <div class="user-profile dropdown">
+                    <div class="user-info" data-bs-toggle="dropdown">
+                        <div class="avatar">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <span class="user-name">João Silva</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Perfil</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Configurações</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="login.html"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Page Content -->
+        <main class="content">
+            <div class="page-header">
+                <div>
+                    <h1>Detalhes do Item - FUR001</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="itens-fisicos.html">Itens Físicos</a></li>
+                            <li class="breadcrumb-item active">FUR001</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-warning" onclick="borrowItem('FUR001')">
+                        <i class="bi bi-box-arrow-right"></i> Retirar Item
+                    </button>
+                    <button class="btn btn-outline-secondary" onclick="window.location.href='itens-fisicos.html'">
+                        <i class="bi bi-arrow-left"></i> Voltar
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Item Information -->
+                <div class="col-lg-8 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Informações do Item</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <td><strong>ID do Item:</strong></td>
+                                            <td>FUR001</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Produto:</strong></td>
+                                            <td>Furadeira Bosch GSB 550</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Categoria:</strong></td>
+                                            <td>Ferramentas Elétricas</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Marca:</strong></td>
+                                            <td>Bosch</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Modelo:</strong></td>
+                                            <td>GSB 550</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <table class="table table-borderless">
+                                        <tr>
+                                            <td><strong>Status Atual:</strong></td>
+                                            <td><span class="badge bg-success"><i class="bi bi-check-circle"></i> Disponível</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Localização:</strong></td>
+                                            <td>Almoxarifado - A1-B2</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Data de Cadastro:</strong></td>
+                                            <td>15/10/2024</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Valor:</strong></td>
+                                            <td>R$ 450,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Número de Série:</strong></td>
+                                            <td>BSH550-2024-001</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="row">
+                                <div class="col-12">
+                                    <h6>Descrição:</h6>
+                                    <p>Furadeira de impacto com mandril de 13mm, velocidade variável, reversível, com maleta e conjunto de brocas. Ideal para furação em alvenaria, madeira e metal.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="col-lg-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Estatísticas</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="stat-item mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <span>Total de Empréstimos:</span>
+                                    <strong>15</strong>
+                                </div>
+                            </div>
+                            <div class="stat-item mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <span>Dias em Uso:</span>
+                                    <strong>45</strong>
+                                </div>
+                            </div>
+                            <div class="stat-item mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <span>Devoluções Atrasadas:</span>
+                                    <strong class="text-warning">2</strong>
+                                </div>
+                            </div>
+                            <div class="stat-item mb-3">
+                                <div class="d-flex justify-content-between">
+                                    <span>Manutenções:</span>
+                                    <strong>1</strong>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="d-flex justify-content-between">
+                                    <span>Última Manutenção:</span>
+                                    <strong>05/11/2024</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Movement History -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Histórico de Movimentações</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Data/Hora</th>
+                                    <th>Tipo</th>
+                                    <th>Usuário</th>
+                                    <th>Localização</th>
+                                    <th>Observações</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>20/11/2024 14:30</td>
+                                    <td><span class="badge bg-success">Devolução</span></td>
+                                    <td>Carlos Silva</td>
+                                    <td>Almoxarifado - A1-B2</td>
+                                    <td>Item devolvido em perfeito estado</td>
+                                    <td><span class="badge bg-success">Disponível</span></td>
+                                </tr>
+                                <tr>
+                                    <td>18/11/2024 08:15</td>
+                                    <td><span class="badge bg-warning">Retirada</span></td>
+                                    <td>Carlos Silva</td>
+                                    <td>Setor A - Produção</td>
+                                    <td>Furação de peças metálicas</td>
+                                    <td><span class="badge bg-warning">Emprestado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>15/11/2024 16:45</td>
+                                    <td><span class="badge bg-success">Devolução</span></td>
+                                    <td>Ana Costa</td>
+                                    <td>Almoxarifado - A1-B2</td>
+                                    <td>Devolução no prazo</td>
+                                    <td><span class="badge bg-success">Disponível</span></td>
+                                </tr>
+                                <tr>
+                                    <td>12/11/2024 09:30</td>
+                                    <td><span class="badge bg-warning">Retirada</span></td>
+                                    <td>Ana Costa</td>
+                                    <td>Setor B - Montagem</td>
+                                    <td>Instalação de equipamentos</td>
+                                    <td><span class="badge bg-warning">Emprestado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>05/11/2024 14:00</td>
+                                    <td><span class="badge bg-info">Manutenção</span></td>
+                                    <td>Sistema</td>
+                                    <td>Oficina Manutenção</td>
+                                    <td>Manutenção preventiva - troca de escovas</td>
+                                    <td><span class="badge bg-info">Manutenção</span></td>
+                                </tr>
+                                <tr>
+                                    <td>03/11/2024 11:20</td>
+                                    <td><span class="badge bg-success">Devolução</span></td>
+                                    <td>Pedro Santos</td>
+                                    <td>Almoxarifado - A1-B2</td>
+                                    <td>Item necessita manutenção</td>
+                                    <td><span class="badge bg-success">Disponível</span></td>
+                                </tr>
+                                <tr>
+                                    <td>28/10/2024 13:45</td>
+                                    <td><span class="badge bg-warning">Retirada</span></td>
+                                    <td>Pedro Santos</td>
+                                    <td>Setor C - Soldagem</td>
+                                    <td>Preparação de estruturas</td>
+                                    <td><span class="badge bg-warning">Emprestado</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        function borrowItem(itemId) {
+            showToast(`Redirecionando para retirada do item ${itemId}...`, 'info');
+            setTimeout(() => {
+                window.location.href = `retirada-nova.html?item=${itemId}`;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

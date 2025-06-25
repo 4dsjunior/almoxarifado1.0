@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almoxarifado - Configurações</title>
+    
+    <!-- Bootstrap 5.3.0 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <!-- Logo -->
+        <div class="sidebar-header">
+            <div class="logo-container">
+                <i class="bi bi-boxes logo-icon"></i>
+            </div>
+            <h4>Almoxarifado</h4>
+        </div>
+        
+        <!-- Menu Items -->
+        <ul class="sidebar-menu">
+            <li class="menu-item">
+                <a href="index.html">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="produtos.html">
+                    <i class="bi bi-box"></i>
+                    <span>Produtos</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="movimentacoes.html">
+                    <i class="bi bi-arrow-left-right"></i>
+                    <span>Movimentações</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="categorias.html">
+                    <i class="bi bi-tag"></i>
+                    <span>Categorias</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="fornecedores.html">
+                    <i class="bi bi-truck"></i>
+                    <span>Fornecedores</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a href="relatorios.html">
+                    <i class="bi bi-file-text"></i>
+                    <span>Relatórios</span>
+                </a>
+            </li>
+            <li class="menu-item active">
+                <a href="configuracoes.html">
+                    <i class="bi bi-gear"></i>
+                    <span>Configurações</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Topbar -->
+        <header class="topbar">
+            <button class="btn btn-link menu-toggle d-lg-none" id="menuToggle">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <div class="topbar-right">
+                <!-- Notifications -->
+                <button class="btn btn-link notification-btn" id="notificationBtn">
+                    <i class="bi bi-bell"></i>
+                    <span class="badge">3</span>
+                </button>
+                
+                <!-- User Profile -->
+                <div class="user-profile dropdown">
+                    <div class="user-info" data-bs-toggle="dropdown">
+                        <div class="avatar">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <span class="user-name">João Silva</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Perfil</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Configurações</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="login.html"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Page Content -->
+        <main class="content">
+            <div class="page-header">
+                <h1>Configurações</h1>
+                <p class="text-muted">Configurações gerais do sistema</p>
+            </div>
+
+            <div class="row">
+                <!-- System Settings -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="bi bi-gear me-2"></i>
+                                Configurações do Sistema
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="systemSettingsForm">
+                                <div class="mb-3">
+                                    <label class="form-label">Nome da Empresa</label>
+                                    <input type="text" class="form-control" value="Indústria ABC Ltda" id="companyName">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">CNPJ</label>
+                                    <input type="text" class="form-control" value="12.345.678/0001-90" id="companyCnpj">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Endereço</label>
+                                    <input type="text" class="form-control" value="Rua Industrial, 123 - São Paulo/SP" id="companyAddress">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Moeda Padrão</label>
+                                    <select class="form-select" id="defaultCurrency">
+                                        <option value="BRL" selected>Real (R$)</option>
+                                        <option value="USD">Dólar (US$)</option>
+                                        <option value="EUR">Euro (€)</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Fuso Horário</label>
+                                    <select class="form-select" id="timezone">
+                                        <option value="America/Sao_Paulo" selected>Brasília (GMT-3)</option>
+                                        <option value="America/New_York">Nova York (GMT-5)</option>
+                                        <option value="Europe/London">Londres (GMT+0)</option>
+                                    </select>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-check"></i> Salvar Configurações
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notification Settings -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="bi bi-bell me-2"></i>
+                                Notificações
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="notificationSettingsForm">
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                                        <label class="form-check-label" for="emailNotifications">
+                                            Notificações por E-mail
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="lowStockAlerts" checked>
+                                        <label class="form-check-label" for="lowStockAlerts">
+                                            Alertas de Estoque Baixo
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="movementAlerts" checked>
+                                        <label class="form-check-label" for="movementAlerts">
+                                            Alertas de Movimentação
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="reportAlerts">
+                                        <label class="form-check-label" for="reportAlerts">
+                                            Notificações de Relatórios
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">E-mail para Notificações</label>
+                                    <input type="email" class="form-control" value="admin@empresa.com.br" id="notificationEmail">
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-check"></i> Salvar Notificações
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stock Settings -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="bi bi-box me-2"></i>
+                                Configurações de Estoque
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="stockSettingsForm">
+                                <div class="mb-3">
+                                    <label class="form-label">Método de Valorização</label>
+                                    <select class="form-select" id="valuationMethod">
+                                        <option value="fifo" selected>FIFO (Primeiro a Entrar, Primeiro a Sair)</option>
+                                        <option value="lifo">LIFO (Último a Entrar, Primeiro a Sair)</option>
+                                        <option value="average">Custo Médio Ponderado</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Alerta de Estoque Mínimo (%)</label>
+                                    <input type="number" class="form-control" value="20" min="1" max="100" id="minStockAlert">
+                                    <small class="form-text text-muted">Percentual do estoque mínimo para gerar alerta</small>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Código Automático de Produtos</label>
+                                    <select class="form-select" id="autoProductCode">
+                                        <option value="sequential" selected>Sequencial (PRD001, PRD002...)</option>
+                                        <option value="category">Por Categoria (FER001, PAR001...)</option>
+                                        <option value="manual">Manual</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="allowNegativeStock">
+                                        <label class="form-check-label" for="allowNegativeStock">
+                                            Permitir Estoque Negativo
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="requireApproval" checked>
+                                        <label class="form-check-label" for="requireApproval">
+                                            Exigir Aprovação para Saídas
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-check"></i> Salvar Configurações
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Management -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="bi bi-people me-2"></i>
+                                Gerenciamento de Usuários
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#userModal">
+                                    <i class="bi bi-plus"></i> Novo Usuário
+                                </button>
+                            </div>
+                            
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>E-mail</th>
+                                            <th>Perfil</th>
+                                            <th>Status</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>João Silva</td>
+                                            <td>joao@empresa.com.br</td>
+                                            <td><span class="badge bg-danger">Admin</span></td>
+                                            <td><span class="badge bg-success">Ativo</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary" title="Editar">
+                                                    <i class="bi bi-pencil"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" title="Desativar">
+                                                    <i class="bi bi-toggle-off"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maria Santos</td>
+                                            <td>maria@empresa.com.br</td>
+                                            <td><span class="badge bg-warning">Operador</span></td>
+                                            <td><span class="badge bg-success">Ativo</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary" title="Editar">
+                                                    <i class="bi bi-pencil"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" title="Desativar">
+                                                    <i class="bi bi-toggle-off"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Carlos Lima</td>
+                                            <td>carlos@empresa.com.br</td>
+                                            <td><span class="badge bg-info">Consulta</span></td>
+                                            <td><span class="badge bg-secondary">Inativo</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary" title="Editar">
+                                                    <i class="bi bi-pencil"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-success" title="Ativar">
+                                                    <i class="bi bi-toggle-on"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backup & Security -->
+                <div class="col-lg-12 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="bi bi-shield-check me-2"></i>
+                                Backup e Segurança
+                            </h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Backup Automático</h5>
+                                    <div class="mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="autoBackup" checked>
+                                            <label class="form-check-label" for="autoBackup">
+                                                Backup Automático Diário
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Horário do Backup</label>
+                                        <input type="time" class="form-control" value="02:00" id="backupTime">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Retenção (dias)</label>
+                                        <input type="number" class="form-control" value="30" min="1" id="backupRetention">
+                                    </div>
+                                    
+                                    <button class="btn btn-success" onclick="createBackup()">
+                                        <i class="bi bi-download"></i> Criar Backup Agora
+                                    </button>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <h5>Configurações de Segurança</h5>
+                                    <div class="mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="twoFactor">
+                                            <label class="form-check-label" for="twoFactor">
+                                                Autenticação de Dois Fatores
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Tempo de Sessão (minutos)</label>
+                                        <input type="number" class="form-control" value="60" min="15" id="sessionTimeout">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="auditLog" checked>
+                                            <label class="form-check-label" for="auditLog">
+                                                Log de Auditoria
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <button class="btn btn-warning" onclick="viewAuditLog()">
+                                        <i class="bi bi-file-text"></i> Ver Log de Auditoria
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- User Modal -->
+    <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userModalLabel">Novo Usuário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="userForm">
+                        <div class="mb-3">
+                            <label for="userName" class="form-label">Nome Completo *</label>
+                            <input type="text" class="form-control" id="userName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userEmail" class="form-label">E-mail *</label>
+                            <input type="email" class="form-control" id="userEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userPassword" class="form-label">Senha *</label>
+                            <input type="password" class="form-control" id="userPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="userRole" class="form-label">Perfil *</label>
+                            <select class="form-select" id="userRole" required>
+                                <option value="">Selecione...</option>
+                                <option value="admin">Administrador</option>
+                                <option value="operator">Operador</option>
+                                <option value="viewer">Consulta</option>
+                            </select>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="userActive" checked>
+                            <label class="form-check-label" for="userActive">
+                                Usuário Ativo
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="saveUser()">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Form submissions
+        document.getElementById('systemSettingsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showToast('Configurações do sistema salvas com sucesso!', 'success');
+        });
+
+        document.getElementById('notificationSettingsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showToast('Configurações de notificação salvas com sucesso!', 'success');
+        });
+
+        document.getElementById('stockSettingsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showToast('Configurações de estoque salvas com sucesso!', 'success');
+        });
+
+        function saveUser() {
+            const form = document.getElementById('userForm');
+            const name = document.getElementById('userName').value;
+            const email = document.getElementById('userEmail').value;
+            const password = document.getElementById('userPassword').value;
+            const role = document.getElementById('userRole').value;
+            
+            if (!name.trim() || !email.trim() || !password.trim() || !role) {
+                showToast('Por favor, preencha todos os campos obrigatórios', 'danger');
+                return;
+            }
+            
+            showToast('Salvando usuário...', 'info');
+            
+            setTimeout(() => {
+                showToast('Usuário salvo com sucesso!', 'success');
+                const modal = bootstrap.Modal.getInstance(document.getElementById('userModal'));
+                modal.hide();
+                form.reset();
+            }, 1500);
+        }
+
+        function createBackup() {
+            showToast('Iniciando backup do sistema...', 'info');
+            
+            setTimeout(() => {
+                showToast('Backup criado com sucesso!', 'success');
+            }, 3000);
+        }
+
+        function viewAuditLog() {
+            showToast('Carregando log de auditoria...', 'info');
+            setTimeout(() => {
+                window.open('#', '_blank');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
