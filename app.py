@@ -144,6 +144,14 @@ def configuracoes():
 def produto_novo():
     return render_template('produto-novo.html')
 
+@app.route('/entrada')
+def entrada():
+    return render_template('entrada.html')
+
+@app.route('/saida')
+def saida():
+    return render_template('saida.html')
+
 @app.route('/item-detalhes')
 def item_detalhes():
     return render_template('item-detalhes.html')
