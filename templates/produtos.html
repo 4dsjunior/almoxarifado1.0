@@ -1,0 +1,75 @@
+
+{% extends "layout.html" %}
+
+{% block title %}Produtos{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Produtos</h1>
+    <button class="btn btn-primary" data-href="{{ url_for('produto_novo') }}">
+        <i class="bi bi-plus"></i> Novo Produto
+    </button>
+</div>
+
+<!-- Filters -->
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Buscar por nome ou código..." id="searchInput">
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="categoryFilter">
+                    <option value="">Todas as categorias</option>
+                    <option value="ferramentas">Ferramentas</option>
+                    <option value="parafusos">Parafusos</option>
+                    <option value="equipamentos">Equipamentos</option>
+                    <option value="materiais">Materiais Elétricos</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="statusFilter">
+                    <option value="">Todos os status</option>
+                    <option value="normal">Normal</option>
+                    <option value="baixo">Estoque Baixo</option>
+                    <option value="critico">Crítico</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-outline-secondary w-100" id="clearFiltersBtn">
+                    <i class="bi bi-x"></i> Limpar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Products Table -->
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover" id="productsTable">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Estoque</th>
+                        <th>Mínimo</th>
+                        <th>Localização</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be populated dynamically by produtos.js -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ vite_assets.get('static/js/produtos.js') }}"></script>
+{% endblock %}

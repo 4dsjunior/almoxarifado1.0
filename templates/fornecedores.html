@@ -1,0 +1,389 @@
+
+{% extends "layout.html" %}
+
+{% block title %}Fornecedores{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Fornecedores</h1>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#supplierModal">
+        <i class="bi bi-plus"></i> Novo Fornecedor
+    </button>
+</div>
+
+<!-- Filters -->
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Buscar por nome ou CNPJ..." id="searchSupplier">
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="statusFilter">
+                    <option value="">Todos os status</option>
+                    <option value="ativo">Ativo</option>
+                    <option value="inativo">Inativo</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="cityFilter">
+                    <option value="">Todas as cidades</option>
+                    <option value="sao-paulo">São Paulo</option>
+                    <option value="rio-janeiro">Rio de Janeiro</option>
+                    <option value="belo-horizonte">Belo Horizonte</option>
+                    <option value="curitiba">Curitiba</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-outline-secondary w-100" onclick="clearSupplierFilters()">
+                    <i class="bi bi-x"></i> Limpar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Suppliers Table -->
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover" id="suppliersTable">
+                <thead>
+                    <tr>
+                        <th>Razão Social</th>
+                        <th>CNPJ</th>
+                        <th>Contato</th>
+                        <th>Cidade</th>
+                        <th>Produtos</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div>
+                                <strong>Fornecedor ABC Ltda</strong>
+                                <br>
+                                <small class="text-muted">Industrial Supply Co.</small>
+                            </div>
+                        </td>
+                        <td>12.345.678/0001-90</td>
+                        <td>
+                            <div>
+                                <i class="bi bi-telephone"></i> (11) 1234-5678<br>
+                                <i class="bi bi-envelope"></i> contato@abc.com.br
+                            </div>
+                        </td>
+                        <td>São Paulo - SP</td>
+                        <td><span class="badge bg-info">45 produtos</span></td>
+                        <td><span class="badge bg-success">Ativo</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary edit-supplier-btn" title="Editar" data-supplier-id="SUP001">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-info view-products-btn" title="Produtos" data-supplier-id="SUP001">
+                                <i class="bi bi-box"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-warning view-history-btn" title="Histórico" data-supplier-id="SUP001">
+                                <i class="bi bi-clock-history"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger toggle-status-btn" title="Desativar" data-supplier-id="SUP001" data-supplier-name="Fornecedor ABC Ltda" data-status="active">
+                                <i class="bi bi-toggle-off"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <strong>Fornecedor XYZ S/A</strong>
+                                <br>
+                                <small class="text-muted">Tools & Equipment</small>
+                            </div>
+                        </td>
+                        <td>98.765.432/0001-10</td>
+                        <td>
+                            <div>
+                                <i class="bi bi-telephone"></i> (21) 9876-5432<br>
+                                <i class="bi bi-envelope"></i> vendas@xyz.com.br
+                            </div>
+                        </td>
+                        <td>Rio de Janeiro - RJ</td>
+                        <td><span class="badge bg-info">32 produtos</span></td>
+                        <td><span class="badge bg-success">Ativo</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary edit-supplier-btn" title="Editar" data-supplier-id="SUP002">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-info view-products-btn" title="Produtos" data-supplier-id="SUP002">
+                                <i class="bi bi-box"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-warning view-history-btn" title="Histórico" data-supplier-id="SUP002">
+                                <i class="bi bi-clock-history"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger toggle-status-btn" title="Desativar" data-supplier-id="SUP002" data-supplier-name="Fornecedor XYZ S/A" data-status="active">
+                                <i class="bi bi-toggle-off"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <strong>Ferramentas & Cia</strong>
+                                <br>
+                                <small class="text-muted">Hardware Store</small>
+                            </div>
+                        </td>
+                        <td>11.222.333/0001-44</td>
+                        <td>
+                            <div>
+                                <i class="bi bi-telephone"></i> (31) 3333-4444<br>
+                                <i class="bi bi-envelope"></i> info@ferramentas.com.br
+                            </div>
+                        </td>
+                        <td>Belo Horizonte - MG</td>
+                        <td><span class="badge bg-info">67 produtos</span></td>
+                        <td><span class="badge bg-success">Ativo</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary edit-supplier-btn" title="Editar" data-supplier-id="SUP003">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-info view-products-btn" title="Produtos" data-supplier-id="SUP003">
+                                <i class="bi bi-box"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-warning view-history-btn" title="Histórico" data-supplier-id="SUP003">
+                                <i class="bi bi-clock-history"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger toggle-status-btn" title="Desativar" data-supplier-id="SUP003" data-supplier-name="Ferramentas & Cia" data-status="active">
+                                <i class="bi bi-toggle-off"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <strong>Industrial Supply</strong>
+                                <br>
+                                <small class="text-muted">Industrial Equipment</small>
+                            </div>
+                        </td>
+                        <td>55.666.777/0001-88</td>
+                        <td>
+                            <div>
+                                <i class="bi bi-telephone"></i> (41) 5555-6666<br>
+                                <i class="bi bi-envelope"></i> suprimentos@industrial.com.br
+                            </div>
+                        </td>
+                        <td>Curitiba - PR</td>
+                        <td><span class="badge bg-info">23 produtos</span></td>
+                        <td><span class="badge bg-warning">Inativo</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary edit-supplier-btn" title="Editar" data-supplier-id="SUP004">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-info view-products-btn" title="Produtos" data-supplier-id="SUP004">
+                                <i class="bi bi-box"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-warning view-history-btn" title="Histórico" data-supplier-id="SUP004">
+                                <i class="bi bi-clock-history"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-success toggle-status-btn" title="Ativar" data-supplier-id="SUP004" data-supplier-name="Industrial Supply" data-status="inactive">
+                                <i class="bi bi-toggle-on"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Supplier Modal -->
+<div class="modal fade" id="supplierModal" tabindex="-1" aria-labelledby="supplierModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="supplierModalLabel">Novo Fornecedor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="supplierForm">
+                    <div class="row">
+                        <div class="col-md-8 mb-3">
+                            <label for="supplierName" class="form-label">Razão Social *</label>
+                            <input type="text" class="form-control" id="supplierName" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="supplierCnpj" class="form-label">CNPJ *</label>
+                            <input type="text" class="form-control" id="supplierCnpj" placeholder="00.000.000/0000-00" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="supplierFantasy" class="form-label">Nome Fantasia</label>
+                            <input type="text" class="form-control" id="supplierFantasy">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="supplierPhone" class="form-label">Telefone *</label>
+                            <input type="tel" class="form-control" id="supplierPhone" placeholder="(00) 0000-0000" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="supplierEmail" class="form-label">E-mail *</label>
+                            <input type="email" class="form-control" id="supplierEmail" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="supplierContact" class="form-label">Pessoa de Contato</label>
+                            <input type="text" class="form-control" id="supplierContact">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-8 mb-3">
+                            <label for="supplierAddress" class="form-label">Endereço</label>
+                            <input type="text" class="form-control" id="supplierAddress">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="supplierCep" class="form-label">CEP</label>
+                            <input type="text" class="form-control" id="supplierCep" placeholder="00000-000">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="supplierCity" class="form-label">Cidade</label>
+                            <input type="text" class="form-control" id="supplierCity">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="supplierState" class="form-label">Estado</label>
+                            <select class="form-select" id="supplierState">
+                                <option value="">Selecione...</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PR">Paraná</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="supplierNotes" class="form-label">Observações</label>
+                        <textarea class="form-control" id="supplierNotes" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="supplierActive" checked>
+                        <label class="form-check-label" for="supplierActive">
+                            Fornecedor Ativo
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="saveSupplierBtn">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('clearSupplierFiltersBtn').addEventListener('click', clearSupplierFilters);
+
+        document.querySelectorAll('.edit-supplier-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const supplierId = this.dataset.supplierId;
+                document.getElementById('supplierModalLabel').textContent = 'Editar Fornecedor';
+                showToast('Carregando fornecedor para edição...', 'info');
+                const modal = new bootstrap.Modal(document.getElementById('supplierModal'));
+                modal.show();
+            });
+        });
+
+        document.querySelectorAll('.view-products-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const supplierId = this.dataset.supplierId;
+                showToast('Carregando produtos do fornecedor...', 'info');
+                setTimeout(() => {
+                    window.location.href = `{{ url_for('produtos') }}?supplier=${supplierId}`;
+                }, 1000);
+            });
+        });
+
+        document.querySelectorAll('.view-history-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const supplierId = this.dataset.supplierId;
+                showToast('Carregando histórico do fornecedor...', 'info');
+                setTimeout(() => {
+                    window.location.href = `{{ url_for('movimentacoes') }}?supplier=${supplierId}`;
+                }, 1000);
+            });
+        });
+
+        document.querySelectorAll('.toggle-status-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const supplierId = this.dataset.supplierId;
+                const supplierName = this.dataset.supplierName;
+                const currentStatus = this.dataset.status;
+                const action = currentStatus === 'active' ? 'desativar' : 'ativar';
+                
+                if (confirm(`Tem certeza que deseja ${action} o fornecedor "${supplierName}"?`)) {
+                    showToast(`Fornecedor ${action === 'ativar' ? 'ativado' : 'desativado'} com sucesso!`, 'warning');
+                    // In a real application, you would send an API request here to update the status
+                    // and then update the UI accordingly.
+                    // For now, we'll just toggle the button class for demonstration.
+                    if (currentStatus === 'active') {
+                        this.classList.remove('btn-outline-danger');
+                        this.classList.add('btn-outline-success');
+                        this.querySelector('i').className = 'bi bi-toggle-on';
+                        this.dataset.status = 'inactive';
+                        this.title = 'Ativar';
+                    } else {
+                        this.classList.remove('btn-outline-success');
+                        this.classList.add('btn-outline-danger');
+                        this.querySelector('i').className = 'bi bi-toggle-off';
+                        this.dataset.status = 'active';
+                        this.title = 'Desativar';
+                    }
+                }
+            });
+        });
+
+        document.getElementById('saveSupplierBtn').addEventListener('click', function() {
+            const form = document.getElementById('supplierForm');
+            const name = document.getElementById('supplierName').value;
+            const cnpj = document.getElementById('supplierCnpj').value;
+            const email = document.getElementById('supplierEmail').value;
+            const phone = document.getElementById('supplierPhone').value;
+            
+            if (!name.trim() || !cnpj.trim() || !email.trim() || !phone.trim()) {
+                showToast('Por favor, preencha todos os campos obrigatórios', 'danger');
+                return;
+            }
+            
+            showToast('Salvando fornecedor...', 'info');
+            
+            setTimeout(() => {
+                showToast('Fornecedor salvo com sucesso!', 'success');
+                const modal = bootstrap.Modal.getInstance(document.getElementById('supplierModal'));
+                modal.hide();
+                form.reset();
+            }, 1500);
+        });
+    });
+
+    function clearSupplierFilters() {
+        document.getElementById('searchSupplier').value = '';
+        document.getElementById('statusFilter').value = '';
+        document.getElementById('cityFilter').value = '';
+        showToast('Filtros limpos', 'info');
+    }
+</script>
+{% endblock %}

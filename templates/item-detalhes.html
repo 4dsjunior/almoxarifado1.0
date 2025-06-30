@@ -1,0 +1,242 @@
+
+{% extends "layout.html" %}
+
+{% block title %}Detalhes do Item{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Detalhes do Item - FUR001</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('itens_fisicos') }}">Itens Físicos</a></li>
+                <li class="breadcrumb-item active">FUR001</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="d-flex gap-2">
+        <button class="btn btn-warning borrow-item-btn" data-item-id="FUR001">
+            <i class="bi bi-box-arrow-right"></i> Retirar Item
+        </button>
+        <button class="btn btn-outline-secondary" data-href="{{ url_for('itens_fisicos') }}">
+            <i class="bi bi-arrow-left"></i> Voltar
+        </button>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Item Information -->
+    <div class="col-lg-8 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Informações do Item</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td><strong>ID do Item:</strong></td>
+                                <td>FUR001</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Produto:</strong></td>
+                                <td>Furadeira Bosch GSB 550</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Categoria:</strong></td>
+                                <td>Ferramentas Elétricas</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Marca:</strong></td>
+                                <td>Bosch</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Modelo:</strong></td>
+                                <td>GSB 550</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td><strong>Status Atual:</strong></td>
+                                <td><span class="badge bg-success"><i class="bi bi-check-circle"></i> Disponível</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Localização:</strong></td>
+                                <td>Almoxarifado - A1-B2</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Data de Cadastro:</strong></td>
+                                <td>15/10/2024</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Valor:</strong></td>
+                                <td>R$ 450,00</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Número de Série:</strong></td>
+                                <td>BSH550-2024-001</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <hr>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <h6>Descrição:</h6>
+                        <p>Furadeira de impacto com mandril de 13mm, velocidade variável, reversível, com maleta e conjunto de brocas. Ideal para furação em alvenaria, madeira e metal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="col-lg-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Estatísticas</h3>
+            </div>
+            <div class="card-body">
+                <div class="stat-item mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Total de Empréstimos:</span>
+                        <strong>15</strong>
+                    </div>
+                </div>
+                <div class="stat-item mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Dias em Uso:</span>
+                        <strong>45</strong>
+                    </div>
+                </div>
+                <div class="stat-item mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Devoluções Atrasadas:</span>
+                        <strong class="text-warning">2</strong>
+                    </div>
+                </div>
+                <div class="stat-item mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Manutenções:</span>
+                        <strong>1</strong>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="d-flex justify-content-between">
+                        <span>Última Manutenção:</span>
+                        <strong>05/11/2024</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Movement History -->
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Histórico de Movimentações</h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Data/Hora</th>
+                        <th>Tipo</th>
+                        <th>Usuário</th>
+                        <th>Localização</th>
+                        <th>Observações</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>20/11/2024 14:30</td>
+                        <td><span class="badge bg-success">Devolução</span></td>
+                        <td>Carlos Silva</td>
+                        <td>Almoxarifado - A1-B2</td>
+                        <td>Item devolvido em perfeito estado</td>
+                        <td><span class="badge bg-success">Disponível</span></td>
+                    </tr>
+                    <tr>
+                        <td>18/11/2024 08:15</td>
+                        <td><span class="badge bg-warning">Retirada</span></td>
+                        <td>Carlos Silva</td>
+                        <td>Setor A - Produção</td>
+                        <td>Furação de peças metálicas</td>
+                        <td><span class="badge bg-warning">Emprestado</span></td>
+                    </tr>
+                    <tr>
+                        <td>15/11/2024 16:45</td>
+                        <td><span class="badge bg-success">Devolução</span></td>
+                        <td>Ana Costa</td>
+                        <td>Almoxarifado - A1-B2</td>
+                        <td>Devolução no prazo</td>
+                        <td><span class="badge bg-success">Disponível</span></td>
+                    </tr>
+                    <tr>
+                        <td>12/11/2024 09:30</td>
+                        <td><span class="badge bg-warning">Retirada</span></td>
+                        <td>Ana Costa</td>
+                        <td>Setor B - Montagem</td>
+                        <td>Instalação de equipamentos</td>
+                        <td><span class="badge bg-warning">Emprestado</span></td>
+                    </tr>
+                    <tr>
+                        <td>05/11/2024 14:00</td>
+                        <td><span class="badge bg-info">Manutenção</span></td>
+                        <td>Sistema</td>
+                        <td>Oficina Manutenção</td>
+                        <td>Manutenção preventiva - troca de escovas</td>
+                        <td><span class="badge bg-info">Manutenção</span></td>
+                    </tr>
+                    <tr>
+                        <td>03/11/2024 11:20</td>
+                        <td><span class="badge bg-success">Devolução</span></td>
+                        <td>Pedro Santos</td>
+                        <td>Almoxarifado - A1-B2</td>
+                        <td>Item necessita manutenção</td>
+                        <td><span class="badge bg-success">Disponível</span></td>
+                    </tr>
+                    <tr>
+                        <td>28/10/2024 13:45</td>
+                        <td><span class="badge bg-warning">Retirada</span></td>
+                        <td>Pedro Santos</td>
+                        <td>Setor C - Soldagem</td>
+                        <td>Preparação de estruturas</td>
+                        <td><span class="badge bg-warning">Emprestado</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.borrow-item-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const itemId = this.dataset.itemId;
+                showToast(`Redirecionando para retirada do item ${itemId}...`, 'info');
+                setTimeout(() => {
+                    window.location.href = `{{ url_for('retiradas') }}?item=${itemId}`;
+                }, 1000);
+            });
+        });
+
+        document.querySelectorAll('.btn[data-href]').forEach(button => {
+            button.addEventListener('click', function() {
+                window.location.href = this.dataset.href;
+            });
+        });
+    });
+</script>
+{% endblock %}

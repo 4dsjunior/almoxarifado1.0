@@ -1,0 +1,258 @@
+
+{% extends "layout.html" %}
+
+{% block title %}Categorias{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Categorias</h1>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#categoryModal">
+        <i class="bi bi-plus"></i> Nova Categoria
+    </button>
+</div>
+
+<!-- Categories Grid -->
+<div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card category-card">
+            <div class="card-body text-center">
+                <div class="category-icon mb-3">
+                    <i class="bi bi-hammer text-primary" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="card-title">Ferramentas</h5>
+                <p class="text-muted mb-2">245 produtos</p>
+                <div class="category-actions">
+                    <button class="btn btn-sm btn-outline-primary edit-category-btn" data-category-id="ferramentas">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-info view-products-btn" data-category-id="ferramentas">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger delete-category-btn" data-category-id="ferramentas" data-category-name="Ferramentas">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card category-card">
+            <div class="card-body text-center">
+                <div class="category-icon mb-3">
+                    <i class="bi bi-nut text-warning" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="card-title">Parafusos</h5>
+                <p class="text-muted mb-2">189 produtos</p>
+                <div class="category-actions">
+                    <button class="btn btn-sm btn-outline-primary edit-category-btn" data-category-id="parafusos">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-info view-products-btn" data-category-id="parafusos">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger delete-category-btn" data-category-id="parafusos" data-category-name="Parafusos">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card category-card">
+            <div class="card-body text-center">
+                <div class="category-icon mb-3">
+                    <i class="bi bi-gear text-success" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="card-title">Equipamentos</h5>
+                <p class="text-muted mb-2">87 produtos</p>
+                <div class="category-actions">
+                    <button class="btn btn-sm btn-outline-primary edit-category-btn" data-category-id="equipamentos">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-info view-products-btn" data-category-id="equipamentos">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger delete-category-btn" data-category-id="equipamentos" data-category-name="Equipamentos">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card category-card">
+            <div class="card-body text-center">
+                <div class="category-icon mb-3">
+                    <i class="bi bi-lightning text-danger" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="card-title">Materiais Elétricos</h5>
+                <p class="text-muted mb-2">156 produtos</p>
+                <div class="category-actions">
+                    <button class="btn btn-sm btn-outline-primary edit-category-btn" data-category-id="materiais">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-info view-products-btn" data-category-id="materiais">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger delete-category-btn" data-category-id="materiais" data-category-name="Materiais Elétricos">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card category-card">
+            <div class="card-body text-center">
+                <div class="category-icon mb-3">
+                    <i class="bi bi-droplet text-info" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="card-title">Consumíveis</h5>
+                <p class="text-muted mb-2">98 produtos</p>
+                <div class="category-actions">
+                    <button class="btn btn-sm btn-outline-primary edit-category-btn" data-category-id="consumiveis">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-info view-products-btn" data-category-id="consumiveis">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger delete-category-btn" data-category-id="consumiveis" data-category-name="Consumíveis">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="card category-card">
+            <div class="card-body text-center">
+                <div class="category-icon mb-3">
+                    <i class="bi bi-shield text-secondary" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="card-title">EPI</h5>
+                <p class="text-muted mb-2">67 produtos</p>
+                <div class="category-actions">
+                    <button class="btn btn-sm btn-outline-primary edit-category-btn" data-category-id="epi">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-info view-products-btn" data-category-id="epi">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger delete-category-btn" data-category-id="epi" data-category-name="EPI">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Category Modal -->
+<div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="categoryModalLabel">Nova Categoria</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="categoryForm">
+                    <div class="mb-3">
+                        <label for="categoryName" class="form-label">Nome da Categoria *</label>
+                        <input type="text" class="form-control" id="categoryName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoryDescription" class="form-label">Descrição</label>
+                        <textarea class="form-control" id="categoryDescription" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="categoryIcon" class="form-label">Ícone</label>
+                        <select class="form-select" id="categoryIcon">
+                            <option value="bi-hammer">🔨 Martelo</option>
+                            <option value="bi-nut">🔩 Parafuso</option>
+                            <option value="bi-gear">⚙️ Engrenagem</option>
+                            <option value="bi-lightning">⚡ Raio</option>
+                            <option value="bi-droplet">💧 Gota</option>
+                            <option value="bi-shield">🛡️ Escudo</option>
+                            <option value="bi-wrench">🔧 Chave</option>
+                            <option value="bi-screwdriver">🪛 Chave de Fenda</option>
+                        </select>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="categoryActive" checked>
+                        <label class="form-check-label" for="categoryActive">
+                            Categoria Ativa
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="saveCategory()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.edit-category-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const categoryId = this.dataset.categoryId;
+                document.getElementById('categoryModalLabel').textContent = 'Editar Categoria';
+                // Populate form with category data
+                showToast('Carregando categoria para edição...', 'info');
+                const modal = new bootstrap.Modal(document.getElementById('categoryModal'));
+                modal.show();
+            });
+        });
+
+        document.querySelectorAll('.view-products-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const categoryId = this.dataset.categoryId;
+                showToast('Carregando produtos da categoria...', 'info');
+                setTimeout(() => {
+                    window.location.href = `{{ url_for('produtos') }}?category=${categoryId}`;
+                }, 1000);
+            });
+        });
+
+        document.querySelectorAll('.delete-category-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const categoryId = this.dataset.categoryId;
+                const categoryName = this.dataset.categoryName;
+                confirmDelete(categoryName, () => {
+                    // Simulate category deletion
+                    showToast('Categoria excluída com sucesso!', 'success');
+                });
+            });
+        });
+
+        document.getElementById('saveCategoryBtn').addEventListener('click', function() {
+            const form = document.getElementById('categoryForm');
+            const name = document.getElementById('categoryName').value;
+            
+            if (!name.trim()) {
+                showToast('Por favor, informe o nome da categoria', 'danger');
+                return;
+            }
+            
+            showToast('Salvando categoria...', 'info');
+            
+            setTimeout(() => {
+                showToast('Categoria salva com sucesso!', 'success');
+                const modal = bootstrap.Modal.getInstance(document.getElementById('categoryModal'));
+                modal.hide();
+                form.reset();
+            }, 1500);
+        });
+    });
+</script>
+{% endblock %}

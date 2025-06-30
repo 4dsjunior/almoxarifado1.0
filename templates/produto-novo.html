@@ -1,0 +1,244 @@
+
+{% extends "layout.html" %}
+
+{% block title %}Novo Produto{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Novo Produto</h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('produtos') }}">Produtos</a></li>
+            <li class="breadcrumb-item active">Novo Produto</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form id="productForm">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Código do Produto *</label>
+                    <input type="text" class="form-control" id="codigo" placeholder="PRD001" required>
+                    <div class="invalid-feedback">
+                        Por favor, informe o código do produto.
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Nome do Produto *</label>
+                    <input type="text" class="form-control" id="nome" placeholder="Nome do produto" required>
+                    <div class="invalid-feedback">
+                        Por favor, informe o nome do produto.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Categoria *</label>
+                    <select class="form-select" id="categoria" required>
+                        <option value="">Selecione uma categoria...</option>
+                        <option value="ferramentas">Ferramentas</option>
+                        <option value="parafusos">Parafusos e Fixadores</option>
+                        <option value="equipamentos">Equipamentos</option>
+                        <option value="materiais">Materiais Elétricos</option>
+                        <option value="consumiveis">Consumíveis</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Por favor, selecione uma categoria.
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Unidade de Medida *</label>
+                    <select class="form-select" id="unidade" required>
+                        <option value="">Selecione...</option>
+                        <option value="UN">Unidade</option>
+                        <option value="PC">Peça</option>
+                        <option value="KG">Quilograma</option>
+                        <option value="M">Metro</option>
+                        <option value="L">Litro</option>
+                        <option value="CX">Caixa</option>
+                        <option value="PCT">Pacote</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Por favor, selecione a unidade de medida.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Estoque Inicial</label>
+                    <input type="number" class="form-control" id="estoqueInicial" min="0" value="0">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Estoque Mínimo *</label>
+                    <input type="number" class="form-control" id="estoqueMinimo" min="1" required>
+                    <div class="invalid-feedback">
+                        Por favor, informe o estoque mínimo.
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Estoque Máximo</label>
+                    <input type="number" class="form-control" id="estoqueMaximo" min="1">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Localização</label>
+                    <input type="text" class="form-control" id="localizacao" placeholder="A1-B2">
+                    <small class="form-text text-muted">Ex: Corredor A, Prateleira 1, Box 2</small>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Fornecedor Principal</label>
+                    <select class="form-select" id="fornecedor">
+                        <option value="">Selecione...</option>
+                        <option value="fornecedor1">Fornecedor ABC Ltda</option>
+                        <option value="fornecedor2">Fornecedor XYZ S/A</option>
+                        <option value="fornecedor3">Ferramentas & Cia</option>
+                        <option value="fornecedor4">Industrial Supply</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Valor Unitário</label>
+                    <div class="input-group">
+                        <span class="input-group-text">R$</span>
+                        <input type="number" class="form-control" id="valorUnitario" step="0.01" min="0">
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">NCM</label>
+                    <input type="text" class="form-control" id="ncm" placeholder="0000.00.00">
+                    <small class="form-text text-muted">Nomenclatura Comum do Mercosul</small>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Descrição Detalhada</label>
+                <textarea class="form-control" id="descricao" rows="3" placeholder="Descrição detalhada do produto, especificações técnicas, etc."></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Observações</label>
+                <textarea class="form-control" id="observacoes" rows="2" placeholder="Observações adicionais sobre o produto..."></textarea>
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="mb-3">Configurações Avançadas</h5>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="ativo" checked>
+                        <label class="form-check-label" for="ativo">
+                            Produto Ativo
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="controlarEstoque" checked>
+                        <label class="form-check-label" for="controlarEstoque">
+                            Controlar Estoque
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="produtoPerecivel">
+                        <label class="form-check-label" for="produtoPerecivel">
+                            Produto Perecível
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="alertaVencimento">
+                        <label class="form-check-label" for="alertaVencimento">
+                            Alerta de Vencimento
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-check"></i> Salvar Produto
+                </button>
+                <button type="button" class="btn btn-outline-warning" id="clearFormBtn" data-form-id="productForm">
+                    <i class="bi bi-arrow-clockwise"></i> Limpar
+                </button>
+                <button type="button" class="btn btn-outline-secondary" data-href="{{ url_for('produtos') }}">
+                    <i class="bi bi-arrow-left"></i> Voltar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.getElementById('productForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (!validateForm('productForm')) {
+            showToast('Por favor, preencha todos os campos obrigatórios', 'danger');
+            return;
+        }
+        
+        // Simulate API call
+        showToast('Salvando produto...', 'info');
+        
+        setTimeout(() => {
+            showToast('Produto cadastrado com sucesso!', 'success');
+            setTimeout(() => {
+                window.location.href = "{{ url_for('produtos') }}";
+            }, 1500);
+        }, 2000);
+    });
+
+    document.getElementById('clearFormBtn').addEventListener('click', function() {
+        const formId = this.dataset.formId;
+        clearForm(formId);
+    });
+
+    document.querySelectorAll('.btn[data-href]').forEach(button => {
+        button.addEventListener('click', function() {
+            window.location.href = this.dataset.href;
+        });
+    });
+
+    // Auto-generate product code
+    document.getElementById('categoria').addEventListener('change', function() {
+        const codigo = document.getElementById('codigo');
+        if (!codigo.value) {
+            const category = this.value;
+            const prefixes = {
+                'ferramentas': 'FER',
+                'parafusos': 'PAR',
+                'equipamentos': 'EQP',
+                'materiais': 'MAT',
+                'consumiveis': 'CON'
+            };
+            if (prefixes[category]) {
+                const randomNum = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+                codigo.value = prefixes[category] + randomNum;
+            }
+        }
+    });
+</script>
+{% endblock %}

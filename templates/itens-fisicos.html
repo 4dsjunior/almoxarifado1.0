@@ -1,0 +1,302 @@
+
+{% extends "layout.html" %}
+
+{% block title %}Itens Físicos{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Itens Físicos</h1>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#itemModal">
+        <i class="bi bi-plus"></i> Novo Item
+    </button>
+</div>
+
+<!-- Filters -->
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="Buscar por ID ou produto..." id="searchItems">
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" id="statusFilter">
+                    <option value="">Todos os status</option>
+                    <option value="disponivel">Disponível</option>
+                    <option value="emprestado">Emprestado</option>
+                    <option value="manutencao">Manutenção</option>
+                    <option value="atrasado">Atrasado</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" id="categoryFilter">
+                    <option value="">Todas as categorias</option>
+                    <option value="ferramentas">Ferramentas</option>
+                    <option value="equipamentos">Equipamentos</option>
+                    <option value="maquinas">Máquinas</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" id="locationFilter">
+                    <option value="">Todas as localizações</option>
+                    <option value="almoxarifado">Almoxarifado</option>
+                    <option value="setor-a">Setor A</option>
+                    <option value="setor-b">Setor B</option>
+                    <option value="manutencao">Oficina Manutenção</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-outline-secondary w-100" id="clearItemFiltersBtn">
+                    <i class="bi bi-x"></i> Limpar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Items Table -->
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover" id="itemsTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Produto</th>
+                        <th>Status</th>
+                        <th>Localização</th>
+                        <th>Usuário Atual</th>
+                        <th>Última Movimentação</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>FUR001</strong></td>
+                        <td>
+                            <div>
+                                <strong>Furadeira Bosch GSB 550</strong>
+                                <br>
+                                <small class="text-muted">Ferramentas Elétricas</small>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-success"><i class="bi bi-check-circle"></i> Disponível</span></td>
+                        <td>Almoxarifado - A1-B2</td>
+                        <td>-</td>
+                        <td>20/11/2024 14:30</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning borrow-item-btn" title="Retirar" data-item-id="FUR001">
+                                <i class="bi bi-box-arrow-right"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-info view-details-btn" title="Detalhes" data-item-id="FUR001">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>MAR002</strong></td>
+                        <td>
+                            <div>
+                                <strong>Martelo Pneumático Atlas</strong>
+                                <br>
+                                <small class="text-muted">Ferramentas Pneumáticas</small>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-danger"><i class="bi bi-exclamation-triangle"></i> Atrasado</span></td>
+                        <td>Setor A - Produção</td>
+                        <td>Ana Costa</td>
+                        <td>19/11/2024 08:00</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary return-item-btn" title="Devolver" data-item-id="MAR002">
+                                <i class="bi bi-box-arrow-in-left"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-info view-details-btn" title="Detalhes" data-item-id="MAR002">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>ESM003</strong></td>
+                        <td>
+                            <div>
+                                <strong>Esmerilhadeira Angular Makita</strong>
+                                <br>
+                                <small class="text-muted">Ferramentas Elétricas</small>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-warning"><i class="bi bi-clock"></i> Emprestado</span></td>
+                        <td>Setor B - Soldagem</td>
+                        <td>Pedro Santos</td>
+                        <td>22/11/2024 09:15</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary return-item-btn" title="Devolver" data-item-id="ESM003">
+                                <i class="bi bi-box-arrow-in-left"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-info view-details-btn" title="Detalhes" data-item-id="ESM003">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>GER004</strong></td>
+                        <td>
+                            <div>
+                                <strong>Gerador Diesel 5KVA</strong>
+                                <br>
+                                <small class="text-muted">Equipamentos</small>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-info"><i class="bi bi-wrench"></i> Manutenção</span></td>
+                        <td>Oficina Manutenção</td>
+                        <td>-</td>
+                        <td>18/11/2024 16:45</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-secondary" disabled title="Em manutenção">
+                                <i class="bi bi-wrench"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-info view-details-btn" title="Detalhes" data-item-id="GER004">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>CHV005</strong></td>
+                        <td>
+                            <div>
+                                <strong>Chave de Impacto Pneumática</strong>
+                                <br>
+                                <small class="text-muted">Ferramentas Pneumáticas</small>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-success"><i class="bi bi-check-circle"></i> Disponível</span></td>
+                        <td>Almoxarifado - B2-C1</td>
+                        <td>-</td>
+                        <td>21/11/2024 11:20</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning borrow-item-btn" title="Retirar" data-item-id="CHV005">
+                                <i class="bi bi-box-arrow-right"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-info view-details-btn" title="Detalhes" data-item-id="CHV005">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Item Modal -->
+<div class="modal fade" id="itemModal" tabindex="-1" aria-labelledby="itemModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="itemModalLabel">Novo Item Físico</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="itemForm">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="itemId" class="form-label">ID do Item *</label>
+                            <input type="text" class="form-control" id="itemId" placeholder="FUR001" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="itemProduct" class="form-label">Produto *</label>
+                            <select class="form-select" id="itemProduct" required>
+                                <option value="">Selecione o produto...</option>
+                                <option value="furadeira-bosch">Furadeira Bosch GSB 550</option>
+                                <option value="martelo-pneumatico">Martelo Pneumático Atlas</option>
+                                <option value="esmerilhadeira-makita">Esmerilhadeira Angular Makita</option>
+                                <option value="gerador-diesel">Gerador Diesel 5KVA</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="itemLocation" class="form-label">Localização *</label>
+                            <input type="text" class="form-control" id="itemLocation" placeholder="A1-B2" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="itemStatus" class="form-label">Status Inicial</label>
+                            <select class="form-select" id="itemStatus">
+                                <option value="disponivel" selected>Disponível</option>
+                                <option value="manutencao">Manutenção</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="itemNotes" class="form-label">Observações</label>
+                        <textarea class="form-control" id="itemNotes" rows="3" placeholder="Informações adicionais sobre o item..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="saveItemBtn">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('clearItemFiltersBtn').addEventListener('click', clearItemFilters);
+
+        document.querySelectorAll('.borrow-item-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const itemId = this.dataset.itemId;
+                showToast(`Redirecionando para retirada do item ${itemId}...`, 'info');
+                setTimeout(() => {
+                    window.location.href = `{{ url_for('retiradas') }}?item=${itemId}`;
+                }, 1000);
+            });
+        });
+
+        document.querySelectorAll('.return-item-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const itemId = this.dataset.itemId;
+                showToast(`Redirecionando para devolução do item ${itemId}...`, 'info');
+                setTimeout(() => {
+                    window.location.href = `{{ url_for('devolucoes') }}?item=${itemId}`;
+                }, 1000);
+            });
+        });
+
+        document.querySelectorAll('.view-details-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const itemId = this.dataset.itemId;
+                showToast(`Carregando detalhes do item ${itemId}...`, 'info');
+                setTimeout(() => {
+                    window.location.href = `{{ url_for('item_detalhes') }}?id=${itemId}`;
+                }, 1000);
+            });
+        });
+
+        document.getElementById('saveItemBtn').addEventListener('click', function() {
+            const form = document.getElementById('itemForm');
+            const itemId = document.getElementById('itemId').value;
+            const product = document.getElementById('itemProduct').value;
+            const location = document.getElementById('itemLocation').value;
+            
+            if (!itemId.trim() || !product || !location.trim()) {
+                showToast('Por favor, preencha todos os campos obrigatórios', 'danger');
+                return;
+            }
+            
+            showToast('Salvando item...', 'info');
+            
+            setTimeout(() => {
+                showToast('Item cadastrado com sucesso!', 'success');
+                const modal = bootstrap.Modal.getInstance(document.getElementById('itemModal'));
+                modal.hide();
+                form.reset();
+            }, 1500);
+        });
+    });
+</script>
+{% endblock %}

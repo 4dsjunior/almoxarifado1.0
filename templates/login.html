@@ -1,0 +1,116 @@
+
+{% extends "login_layout.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <div class="logo-container">
+                <i class="bi bi-boxes logo-icon"></i>
+            </div>
+            <h2>Sistema de Almoxarifado</h2>
+            <p class="text-muted">Faça login para acessar o sistema</p>
+        </div>
+        
+        <form id="loginForm" class="login-form">
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-envelope"></i>
+                    </span>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="password" class="form-label">Senha</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <i class="bi bi-lock"></i>
+                    </span>
+                    <input type="password" class="form-control" id="password" required>
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe">
+                <label class="form-check-label" for="rememberMe">
+                    Lembrar de mim
+                </label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100 mb-3">
+                <i class="bi bi-box-arrow-in-right"></i> Entrar
+            </button>
+            
+            <div class="text-center">
+                <a href="#" class="forgot-password">Esqueceu sua senha?</a>
+            </div>
+        </form>
+        
+        <div class="login-footer">
+            <small class="text-muted">
+                © 2024 Sistema de Almoxarifado Industrial
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="module">
+    import { loginUser } from '{{ url_for('static', filename='assets/api.js') }}';
+
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const loginButton = this.querySelector('button[type="submit"]');
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        if (!email || !password) {
+            showToast('Por favor, preencha e-mail e senha.', 'danger');
+            return;
+        }
+
+        // Desabilitar botão para evitar múltiplos cliques
+        loginButton.disabled = true;
+        loginButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Entrando...';
+
+        const result = await loginUser(email, password);
+
+        if (result.success) {
+            showToast('Login realizado com sucesso!', 'success');
+            setTimeout(() => {
+                window.location.href = "{{ url_for('index') }}";
+            }, 1000);
+        } else {
+            showToast(result.message, 'danger');
+        }
+        
+        // Reabilitar botão
+        loginButton.disabled = false;
+        loginButton.innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Entrar';
+    });
+
+    // Toggle password visibility
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('password');
+        const icon = this.querySelector('i');
+        
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.className = 'bi bi-eye-slash';
+        } else {
+            passwordInput.type = 'password';
+            icon.className = 'bi bi-eye';
+        }
+    });
+</script>
+{% endblock %}

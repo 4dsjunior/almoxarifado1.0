@@ -1,0 +1,218 @@
+
+{% extends "layout.html" %}
+
+{% block title %}Movimentações{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Movimentações</h1>
+    <div class="d-flex gap-2">
+        <button class="btn btn-success" data-href="{{ url_for('entrada') }}">
+            <i class="bi bi-plus-circle"></i> Nova Entrada
+        </button>
+        <button class="btn btn-danger" data-href="{{ url_for('saida') }}">
+            <i class="bi bi-dash-circle"></i> Nova Saída
+        </button>
+    </div>
+</div>
+
+<!-- Filters -->
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="Buscar por produto ou documento..." id="searchMovements">
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" id="typeFilter">
+                    <option value="">Todos os tipos</option>
+                    <option value="entrada">Entrada</option>
+                    <option value="saida">Saída</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <input type="date" class="form-control" id="dateFrom">
+            </div>
+            <div class="col-md-2">
+                <input type="date" class="form-control" id="dateTo">
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" id="productFilter">
+                    <option value="">Todos os produtos</option>
+                    <option value="PRD001">PRD001 - Parafuso M8</option>
+                    <option value="PRD002">PRD002 - Chave Fenda</option>
+                    <option value="PRD003">PRD003 - Martelo 500g</option>
+                </select>
+            </div>
+            <div class="col-md-1">
+                <button class="btn btn-outline-secondary w-100" id="clearMovementFiltersBtn">
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Movements Table -->
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover" id="movementsTable">
+                <thead>
+                    <tr>
+                        <th>Data/Hora</th>
+                        <th>Tipo</th>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Documento</th>
+                        <th>Usuário</th>
+                        <th>Observações</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>23/11/2024 14:30</td>
+                        <td><span class="badge bg-success">Entrada</span></td>
+                        <td>PRD001 - Parafuso Sextavado M8</td>
+                        <td class="text-success fw-bold">+100</td>
+                        <td>NF-001234</td>
+                        <td>João Silva</td>
+                        <td>Compra mensal</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-info" title="Detalhes">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger reverse-movement-btn" title="Estornar" data-movement-id="MOV001">
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>23/11/2024 13:15</td>
+                        <td><span class="badge bg-danger">Saída</span></td>
+                        <td>PRD002 - Chave de Fenda 5mm</td>
+                        <td class="text-danger fw-bold">-25</td>
+                        <td>REQ-5678</td>
+                        <td>Maria Santos</td>
+                        <td>Manutenção Setor A</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-info" title="Detalhes">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger reverse-movement-btn" title="Estornar" data-movement-id="MOV002">
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>23/11/2024 10:45</td>
+                        <td><span class="badge bg-success">Entrada</span></td>
+                        <td>PRD003 - Martelo 500g</td>
+                        <td class="text-success fw-bold">+15</td>
+                        <td>NF-001235</td>
+                        <td>Carlos Lima</td>
+                        <td>Reposição de estoque</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-info" title="Detalhes">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger reverse-movement-btn" title="Estornar" data-movement-id="MOV003">
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>22/11/2024 16:20</td>
+                        <td><span class="badge bg-danger">Saída</span></td>
+                        <td>PRD004 - Fita Isolante 19mm</td>
+                        <td class="text-danger fw-bold">-50</td>
+                        <td>REQ-5679</td>
+                        <td>Ana Costa</td>
+                        <td>Projeto Elétrico</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-info" title="Detalhes">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger reverse-movement-btn" title="Estornar" data-movement-id="MOV004">
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>22/11/2024 14:10</td>
+                        <td><span class="badge bg-success">Entrada</span></td>
+                        <td>PRD005 - Broca 8mm HSS</td>
+                        <td class="text-success fw-bold">+30</td>
+                        <td>NF-001236</td>
+                        <td>Pedro Oliveira</td>
+                        <td>Estoque de segurança</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-info" title="Detalhes">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger reverse-movement-btn" title="Estornar" data-movement-id="MOV005">
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Pagination -->
+        <nav aria-label="Paginação de movimentações" class="mt-3">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Anterior</a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Próximo</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/movimentacoes.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.btn[data-href]').forEach(button => {
+            button.addEventListener('click', function() {
+                window.location.href = this.dataset.href;
+            });
+        });
+
+        document.getElementById('clearMovementFiltersBtn').addEventListener('click', clearMovementFilters);
+        
+        document.querySelectorAll('.reverse-movement-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const movementId = this.dataset.movementId;
+                if (confirm('Tem certeza que deseja estornar esta movimentação?')) {
+                    showToast('Movimentação estornada com sucesso!', 'warning');
+                }
+            });
+        });
+    });
+
+    function clearMovementFilters() {
+        document.getElementById('searchMovements').value = '';
+        document.getElementById('typeFilter').value = '';
+        document.getElementById('dateFrom').value = '';
+        document.getElementById('dateTo').value = '';
+        document.getElementById('productFilter').value = '';
+        showToast('Filtros limpos', 'info');
+    }
+</script>
+{% endblock %}

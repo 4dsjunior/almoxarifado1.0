@@ -1,0 +1,239 @@
+{% extends "layout.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Dashboard</h1>
+    <div class="d-flex gap-2">
+        <button class="btn btn-success" data-href="{{ url_for('retiradas') }}">
+            <i class="bi bi-box-arrow-right"></i> Registrar Retirada
+        </button>
+        <button class="btn btn-primary" data-href="{{ url_for('devolucoes') }}">
+            <i class="bi bi-box-arrow-in-left"></i> Registrar Devolução
+        </button>
+    </div>
+</div>
+
+<!-- Stats Cards -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="stat-card">
+            <div class="stat-icon bg-success-light">
+                <i class="bi bi-check-circle text-success"></i>
+            </div>
+            <div class="stat-content">
+                <h3 id="availableItems">156</h3>
+                <p>Itens Disponíveis</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="stat-card">
+            <div class="stat-icon bg-warning-light">
+                <i class="bi bi-clock text-warning"></i>
+            </div>
+            <div class="stat-content">
+                <h3 id="borrowedItems">23</h3>
+                <p>Itens Emprestados</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="stat-card">
+            <div class="stat-icon bg-danger-light">
+                <i class="bi bi-exclamation-triangle text-danger"></i>
+            </div>
+            <div class="stat-content">
+                <h3 id="overdueItems">5</h3>
+                <p>Itens Atrasados</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="stat-card">
+            <div class="stat-icon bg-info-light">
+                <i class="bi bi-wrench text-info"></i>
+            </div>
+            <div class="stat-content">
+                <h3 id="maintenanceItems">8</h3>
+                <p>Em Manutenção</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions & Alerts Row -->
+<div class="row mb-4">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Itens com Devolução Atrasada</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Usuário</th>
+                                <th>Data Prevista</th>
+                                <th>Dias Atraso</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <strong>FUR001</strong>
+                                        <br>
+                                        <small class="text-muted">Furadeira Bosch GSB 550</small>
+                                    </div>
+                                </td>
+                                <td>Carlos Silva</td>
+                                <td>20/11/2024</td>
+                                <td><span class="badge bg-danger">3 dias</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning contact-user-btn" data-item-id="FUR001">
+                                        <i class="bi bi-telephone"></i> Contatar
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <strong>MAR002</strong>
+                                        <br>
+                                        <small class="text-muted">Martelo Pneumático</small>
+                                    </div>
+                                </td>
+                                <td>Ana Costa</td>
+                                <td>21/11/2024</td>
+                                <td><span class="badge bg-danger">2 dias</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning contact-user-btn" data-item-id="MAR002">
+                                        <i class="bi bi-telephone"></i> Contatar
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                        <strong>ESM003</strong>
+                                        <br>
+                                        <small class="text-muted">Esmerilhadeira Angular</small>
+                                    </div>
+                                </td>
+                                <td>Pedro Santos</td>
+                                <td>22/11/2024</td>
+                                <td><span class="badge bg-danger">1 dia</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-warning contact-user-btn" data-item-id="ESM003">
+                                        <i class="bi bi-telephone"></i> Contatar
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Status dos Itens</h3>
+            </div>
+            <div class="card-body">
+                <div class="chart-container">
+                    <canvas id="statusChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Activities -->
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Atividades Recentes</h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Data/Hora</th>
+                        <th>Tipo</th>
+                        <th>Item</th>
+                        <th>Usuário</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>23/11/2024 14:30</td>
+                        <td><span class="badge bg-success">Devolução</span></td>
+                        <td>FUR005 - Furadeira Makita</td>
+                        <td>João Silva</td>
+                        <td><span class="badge bg-success">Disponível</span></td>
+                    </tr>
+                    <tr>
+                        <td>23/11/2024 13:15</td>
+                        <td><span class="badge bg-warning">Retirada</span></td>
+                        <td>CHV001 - Chave de Impacto</td>
+                        <td>Maria Santos</td>
+                        <td><span class="badge bg-warning">Emprestado</span></td>
+                    </tr>
+                    <tr>
+                        <td>23/11/2024 10:45</td>
+                        <td><span class="badge bg-success">Devolução</span></td>
+                        <td>SER001 - Serra Circular</td>
+                        <td>Carlos Lima</td>
+                        <td><span class="badge bg-success">Disponível</span></td>
+                    </tr>
+                    <tr>
+                        <td>22/11/2024 16:20</td>
+                        <td><span class="badge bg-warning">Retirada</span></td>
+                        <td>TAL001 - Talha Elétrica</td>
+                        <td>Ana Costa</td>
+                        <td><span class="badge bg-warning">Emprestado</span></td>
+                    </tr>
+                    <tr>
+                        <td>22/11/2024 14:10</td>
+                        <td><span class="badge bg-info">Manutenção</span></td>
+                        <td>GER002 - Gerador Diesel</td>
+                        <td>Sistema</td>
+                        <td><span class="badge bg-info">Manutenção</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="{{ vite_assets.get('static/js/dashboard.js') }}"></script>
+<script type="module" src="{{ vite_assets.get('static/js/charts.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.btn[data-href]').forEach(button => {
+            button.addEventListener('click', function() {
+                window.location.href = this.dataset.href;
+            });
+        });
+
+        document.querySelectorAll('.contact-user-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const itemId = this.dataset.itemId;
+                showToast(`Enviando notificação para usuário do item ${itemId}`, 'info');
+                setTimeout(() => {
+                    showToast('Notificação enviada com sucesso!', 'success');
+                }, 1500);
+            });
+        });
+    });
+</script>
+{% endblock %}
