@@ -1,5 +1,9 @@
 import { showToast, confirmDelete } from './ui-utils.js';
 
+// Export functions to window for inline scripts
+window.showToast = showToast;
+window.confirmDelete = confirmDelete;
+
 // Authentication is now handled by the backend (HttpOnly cookies).
 
 // Toggle mobile menu
@@ -13,16 +17,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Active menu item
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    // Active menu item based on current URL
+    const currentPath = window.location.pathname;
     const menuItems = document.querySelectorAll('.menu-item');
     
     menuItems.forEach(item => {
         const link = item.querySelector('a');
-        if (link && link.getAttribute('href') === currentPage) {
-            item.classList.add('active');
-        } else {
-            item.classList.remove('active');
+        if (link) {
+            const href = link.getAttribute('href');
+            if (href === currentPath) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
         }
     });
     
@@ -38,9 +45,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const dateInputs = document.querySelectorAll('input[type="date"]');
     const today = new Date().toISOString().split('T')[0];
     dateInputs.forEach(input => {
-        if (!input.value) {
+        if (!input.value && !input.min) {
             input.value = today;
         }
+    });
+    
+    // Initialize Bootstrap tooltips
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
     });
 });
 
@@ -54,3 +67,33 @@ function showNotifications() {
     
     showToast('3 novas notificações', 'info');
 }
+
+// Global utility functions
+window.validateForm = function(formId) {
+    const form = document.getElementById(formId);
+    if (!form) return false;
+    
+    form.classList.add('was-validated');
+    return form.checkValidity();
+};
+
+window.clearForm = function(formId) {
+    const form = document.getElementById(formId);
+    if (form) {
+        form.reset();
+        form.classList.remove('was-validated');
+    }
+};
+
+// Format currency
+window.formatCurrency = function(value) {
+    return new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    }).format(value);
+};
+
+// Format date
+window.formatDate = function(date) {
+    return new Intl.DateTimeFormat('pt-BR').format(new Date(date));
+};

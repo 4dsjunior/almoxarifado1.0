@@ -1,4 +1,3 @@
-
 {% extends "login_layout.html" %}
 
 {% block title %}Login{% endblock %}
@@ -65,52 +64,33 @@
 
 {% block scripts %}
 <script type="module">
-    import { loginUser } from '{{ url_for('static', filename='assets/api.js') }}';
+    const apiJsPath = "{% if vite_assets.get('static/js/api.js') %}{{ vite_assets.get('static/js/api.js') }}{% else %}{{ url_for('static', filename='js/api.js') }}{% endif %}";
+    const uiUtilsJsPath = "{% if vite_assets.get('static/js/ui-utils.js') %}{{ vite_assets.get('static/js/ui-utils.js') }}{% else %}{{ url_for('static', filename='js/ui-utils.js') }}{% endif %}";
+    
+    import { loginUser } from apiJsPath;
+    import { showToast } from uiUtilsJsPath;
 
-    document.getElementById('loginForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const loginButton = this.querySelector('button[type="submit"]');
-        
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginForm = document.getElementById('loginForm');
 
-        if (!email || !password) {
-            showToast('Por favor, preencha e-mail e senha.', 'danger');
-            return;
-        }
+        loginForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const username = loginForm.username.value;
+            const password = loginForm.password.value;
 
-        // Desabilitar botão para evitar múltiplos cliques
-        loginButton.disabled = true;
-        loginButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Entrando...';
-
-        const result = await loginUser(email, password);
-
-        if (result.success) {
-            showToast('Login realizado com sucesso!', 'success');
-            setTimeout(() => {
-                window.location.href = "{{ url_for('index') }}";
-            }, 1000);
-        } else {
-            showToast(result.message, 'danger');
-        }
-        
-        // Reabilitar botão
-        loginButton.disabled = false;
-        loginButton.innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Entrar';
-    });
-
-    // Toggle password visibility
-    document.getElementById('togglePassword').addEventListener('click', function() {
-        const passwordInput = document.getElementById('password');
-        const icon = this.querySelector('i');
-        
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            icon.className = 'bi bi-eye-slash';
-        } else {
-            passwordInput.type = 'password';
-            icon.className = 'bi bi-eye';
-        }
+            try {
+                const response = await loginUser(username, password);
+                if (response.success) {
+                    showToast('Login bem-sucedido!', 'success');
+                    window.location.href = '/'; // Redireciona para a dashboard
+                } else {
+                    showToast(response.message || 'Usuário ou senha inválidos.', 'error');
+                }
+            } catch (error) {
+                console.error('Erro no login:', error);
+                showToast('Ocorreu um erro ao tentar fazer login. Tente novamente.', 'error');
+            }
+        });
     });
 </script>
 {% endblock %}

@@ -19,18 +19,21 @@ document.addEventListener('DOMContentLoaded', () => {
  * Loads movements from the API based on URL params and populates the table.
  */
 async function loadMovements() {
-    const tableBody = document.getElementById('movementsTable').querySelector('tbody');
+    const tableBody = document.getElementById('movementsTable')?.querySelector('tbody');
+    if (!tableBody) return;
+    
     showLoadingState(tableBody, 6);
 
     try {
         const params = new URLSearchParams(window.location.search);
-        const movements = await get(`movements?${params.toString()}`);
+        const data = await get('/movements', Object.fromEntries(params));
         
-        populateMovementsTable(movements);
+        populateMovementsTable(data.movements || []);
 
     } catch (error) {
+        console.error('Error loading movements:', error);
         showErrorState(tableBody, 'Erro ao carregar movimentações.', 6);
-        if(typeof showToast === 'function') showToast('Falha ao buscar movimentações.', 'error');
+        showToast('Falha ao buscar movimentações.', 'danger');
     }
 }
 
@@ -39,7 +42,9 @@ async function loadMovements() {
  * @param {Array<object>} movements - The list of movements.
  */
 function populateMovementsTable(movements) {
-    const tableBody = document.getElementById('movementsTable').querySelector('tbody');
+    const tableBody = document.getElementById('movementsTable')?.querySelector('tbody');
+    if (!tableBody) return;
+    
     tableBody.innerHTML = ''; // Clear existing rows
 
     if (movements.length === 0) {
@@ -53,7 +58,7 @@ function populateMovementsTable(movements) {
         row.insertCell(1).textContent = movement.productName;
         row.insertCell(2).innerHTML = `<span class="badge bg-${movement.type === 'entrada' ? 'success' : 'danger'}">${movement.type}</span>`;
         row.insertCell(3).textContent = movement.quantity;
-        row.insertCell(4).textContent = new Date(movement.date).toLocaleString();
+        row.insertCell(4).textContent = new Date(movement.date).toLocaleString('pt-BR');
         row.insertCell(5).textContent = movement.user;
     });
 }
@@ -63,10 +68,10 @@ function populateMovementsTable(movements) {
  */
 function applyFilters() {
     const params = new URLSearchParams();
-    const productFilter = document.getElementById('productFilter').value;
-    const typeFilter = document.getElementById('typeFilter').value;
-    const startDate = document.getElementById('startDate').value;
-    const endDate = document.getElementById('endDate').value;
+    const productFilter = document.getElementById('productFilter')?.value;
+    const typeFilter = document.getElementById('typeFilter')?.value;
+    const startDate = document.getElementById('startDate')?.value;
+    const endDate = document.getElementById('endDate')?.value;
 
     if (productFilter) params.set('product', productFilter);
     if (typeFilter) params.set('type', typeFilter);
@@ -79,3 +84,6 @@ function applyFilters() {
     // Reload data asynchronously
     loadMovements();
 }
+
+// Export functions if needed by other modules
+export { loadMovements, applyFilters };

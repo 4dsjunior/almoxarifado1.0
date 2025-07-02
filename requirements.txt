@@ -1,3 +1,9 @@
 Flask
 supabase
 python-dotenv
+colorama
+Werkzeug
+click
+itsdangerous
+Jinja2
+MarkupSafe

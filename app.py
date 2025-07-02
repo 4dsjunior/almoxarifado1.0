@@ -13,21 +13,44 @@ SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-# Helper to read Vite's manifest file.
+# Helper to read Vite's manifest file - CORRECTED VERSION
 def get_vite_assets():
     assets = {}
-    manifest_path = os.path.join(app.static_folder, '.vite', 'manifest.json')
+    # Corrigido: o manifest.json fica na raiz do dist, não em .vite/
+    manifest_path = os.path.join(app.static_folder, 'manifest.json')
+    
+    # Modo desenvolvimento - retornar caminhos diretos para o servidor Vite
+    if app.debug and not os.path.exists(manifest_path):
+        print("Development mode: manifest.json not found. Pointing to Vite dev server.")
+        vite_base_url = 'http://localhost:5173'
+        return {
+            'static/js/main.js': f'{vite_base_url}/static/js/main.js',
+            'static/css/style.css': f'{vite_base_url}/static/css/style.css',
+            'static/js/charts.js': f'{vite_base_url}/static/js/charts.js',
+            'static/js/dashboard.js': f'{vite_base_url}/static/js/dashboard.js',
+            'static/js/movimentacoes.js': f'{vite_base_url}/static/js/movimentacoes.js',
+            'static/js/produtos.js': f'{vite_base_url}/static/js/produtos.js',
+            'static/js/api.js': f'{vite_base_url}/static/js/api.js',
+            'static/js/ui-utils.js': f'{vite_base_url}/static/js/ui-utils.js'
+        }
+    
+    # Modo produção - usar manifest
     if not os.path.exists(manifest_path):
-        print("manifest.json not found. Run 'npm run build'.")
+        print(f"ERROR: manifest.json not found at {manifest_path}. Run 'npm run build'.")
         return {}
         
     with open(manifest_path, 'r') as f:
         manifest = json.load(f)
         
-    assets = {
-        key: url_for('static', filename=value['file'])
-        for key, value in manifest.items() if 'file' in value
-    }
+    # Mapear os arquivos originais para os arquivos com hash
+    for key, value in manifest.items():
+        if isinstance(value, dict) and 'file' in value:
+            # Adicionar o prefixo correto para o Flask servir os arquivos
+            assets[key] = url_for('static', filename=value['file'])
+        elif isinstance(value, str):
+            # Para entradas que são diretamente strings
+            assets[key] = url_for('static', filename=value)
+    
     return assets
 
 @app.context_processor
