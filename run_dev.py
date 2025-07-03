@@ -13,19 +13,19 @@ from threading import Thread
 
 def run_flask():
     """Roda o servidor Flask"""
-    print("🚀 Iniciando servidor Flask...")
+    print("Iniciando servidor Flask...")
     os.environ['FLASK_ENV'] = 'development'
     os.environ['FLASK_DEBUG'] = '1'
     subprocess.run([sys.executable, 'app.py'])
 
 def run_vite():
     """Roda o servidor Vite"""
-    print("⚡ Iniciando servidor Vite...")
+    print("Iniciando servidor Vite...")
     subprocess.run(['npm', 'run', 'dev'], shell=True)
 
 def signal_handler(sig, frame):
     """Trata o sinal de interrupção (Ctrl+C)"""
-    print('\n👋 Encerrando servidores...')
+    print('\nEncerrando servidores...')
     sys.exit(0)
 
 def main():
@@ -38,14 +38,14 @@ def main():
         import flask
         import dotenv
     except ImportError:
-        print("❌ Erro: Dependências Python não instaladas.")
-        print("   Execute: pip install -r requirements.txt")
+        print("Erro: Dependências Python não instaladas.")
+        print("Execute: pip install -r requirements.txt")
         sys.exit(1)
     
     # Verifica se o node_modules existe
     if not os.path.exists('node_modules'):
-        print("❌ Erro: Dependências Node.js não instaladas.")
-        print("   Execute: npm install")
+        print("Erro: Dependências Node.js não instaladas.")
+        print("Execute: npm install")
         sys.exit(1)
     
     # Registra o handler para Ctrl+C
@@ -61,10 +61,10 @@ def main():
     vite_thread.start()
     
     print("Servidores iniciados!")
-    print("📌 Flask: http://localhost:5000")
-    print("📌 Vite: http://localhost:5173")
+    print("Flask: http://localhost:5000")
+    print("Vite: http://localhost:5173")
     print("\nAcesse: http://localhost:5000")
-    print("   (Pressione Ctrl+C para parar)")
+    print("(Pressione Ctrl+C para parar)")
     
     # Mantém o script rodando
     try:
